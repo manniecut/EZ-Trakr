@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Trakkrlist</title>
+    <link rel="shortcut icon" href="">
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+
+
+    <div class="container">
+        <h1>Track Your Packages</h1>
+
+        <form id="js-form">
+            <label for="number-input">Tracking Number:</label>
+            <input type="text" name="number-input" id="js-number-input" required>
+            <br><br>
+            <label for="carrier-input">Choose a carrier:</label>
+            <select name="carrier-input" id="js-carrier-input">
+                <option value="usps">USPS</option>
+                <option value="fedex">FEDEX</option>
+                <option value="ups">UPS</option>
+                <option value="dhl">DHL</option>
+            </select>
+            <input type="submit" value="Add to List!">
+            
+      
+        </form>
+
+        <!--p id="js-error-message" class="error-message"></p-->
+
+        <section id="packages" class="hidden">
+            <h2>Package List</h2>
+            <ul id="package-list">
+            </ul>
+        </section>
+
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous">
+        </script>
+    <script src="index.js"></script>
+</body>
+
+</html>
