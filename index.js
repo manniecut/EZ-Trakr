@@ -1,7 +1,10 @@
 /*
  TO DO
     -make entire list refreshable
+ MAYBE
     -add store cookie functionality
+    -add map of current city location
+    
 */
 
 
