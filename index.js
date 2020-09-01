@@ -1,44 +1,123 @@
-'use strict';
-
-
-const apiKey = "1d62dcc4ccmsh8f65dfaa7cbec9XXXXX7p1a038cjsnc4b64aed5049";
-const searchUrl = "https://trackingmore.p.rapidapi.com/packages/track";
-
 /*
-https://trackingmore.p.rapidapi.com/packages/track?trackingNumber=YT2003521266065328&carrierCode=yunexpress
-
+ TO DO
+    -add cookie functionality
+    -add link to tracking website
+    -add nickname for list item
+    -make list refreshable
 */
 
 
-/************************************************************************************************************************* */
 
 
-function formatQueryString(params) {
+'use strict';
+
+
+const apiKey = "1d62dcc4ccmsh8f65dfaa7cbecXXXXXXX97p1a038cjsnc4b64aed5049";
+const searchUrl = "https://trackingmore.p.rapidapi.com/packages/track";
+
+const STORE = [
+    {trackingNum: "EX-12345698", status: "DELIVERED", date: "2020-08-28 16:21", description: "Your fake package was delivered in or at your doorstep"},
+];
+
+
+
+/*********************** LIST FUNCTIONS ****************************************************/
+
+function generateItemElement(item) {              //formats the STORED items for use in the list
+    console.log('generateItemElement');
+    return`
+    <li data-item-id="${item.trackingNum}">
+      <span class="package-item js-package-item">${item.trackingNum}</span>
+            <h3>${item.trackingNum}</h3>
+            <p>${item.status} - ${item.date}</p>
+            <p>${item.description}</p>
+      <div class="package-item-controls">
+        <button class="package-item-delete js-item-delete">
+            <span class="button-label">Remove</span>
+        </button>
+      </div>
+    </li>`
+};
+
+
+function generatePackageItemsString(trackingStore) { // combines html elements generated from STORE items and returns them ready to be displayed
+    console.log('generatePackageItemsString');
+    const items = trackingStore.map((item) => generateItemElement(item));
+    return items.join("");
+};
+
+
+
+function renderPackageList() { // displays result of generatePackageItemsString in html area
+    console.log('renderPackageList');
+    const packageListItemsString = generatePackageItemsString(STORE);
+    $('.js-package-list').html(packageListItemsString);     // this is the combined formatted HTML strings from STORE
+}
+
+function getItemIdFromElement(item) {
+    console.log('getItemIdFromElement');
+    return $(item)
+    .closest('li')
+    .data('item-id');
+}
+
+
+function deleteListItem(itemId) {
+    console.log(`deleteListItem`)
+    const itemIndex = STORE.findIndex(item => item.trackingNum === itemId);
+    STORE.splice(itemIndex, 1);
+}
+
+function handleDeleteItem() {
+    console.log('handleDeleteItem');
+    $('.js-package-list').on('click','.js-item-delete', event => {
+        console.log('clicked remove')
+        const itemId = getItemIdFromElement(event.currentTarget);
+        deleteListItem(itemId);
+        renderPackageList();
+
+    });
+}
+
+
+
+/********************* ADDING RESPONSE INFORMATION TO THE LIST *****************************/
+
+
+
+function addNumToStore(responseJson) {     //adds information from responseJson to the STORE
+    console.log(`Adding "${responseJson.data.items[0].tracking_number}" to package list`);
+    STORE.push({
+        trackingNum: responseJson.data.items[0].tracking_number, 
+        status: (responseJson.data.items[0].status).toUpperCase(),
+        date: responseJson.data.items[0].origin_info.trackinfo[0].Date,
+        description: responseJson.data.items[0].origin_info.trackinfo[0].StatusDescription
+    });
+}
+
+
+function displayResults(responseJson) {   //stores response data and refreshes the displayed list
+    console.log('displayResults')
+    addNumToStore(responseJson);
+    renderPackageList();
+}
+
+
+
+
+
+/************************ REQUEST FUNCTIONS *********************************************/
+
+
+function formatQueryString(params) {      //
     console.log('running formatQueryString')
     const queryParts = Object.keys(params)
         .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`);
     return queryParts.join('&');
 }
 
-function clearList() {
-    $('#package-list').empty();
-}
 
-
-function displayResults(responseJson) {
-    console.log(responseJson);
-    $('#package-list').append(
-        `<li>
-            <h3>${responseJson.data.items[0].tracking_number}</h3>
-            <p>${(responseJson.data.items[0].status).toUpperCase()} - ${responseJson.data.items[0].origin_info.trackinfo[0].Date}</p>
-            <p>${responseJson.data.items[0].origin_info.trackinfo[0].StatusDescription}</p>
-            </li>`
-    );
-    $('#packages').removeClass('hidden');
-};
-
-
-function getPackageInfo(newTrackingNum, carrier) {
+function getPackageInfo(newTrackingNum, carrier) { //gets the information then runs JSON through displayReults
     console.log('running getPackageInfo');
     console.log(carrier);
     const params = {
@@ -57,7 +136,7 @@ function getPackageInfo(newTrackingNum, carrier) {
     fetch(url, options)
         .then(response => response.json())
         .then(responseJson => displayResults(responseJson))
-        .catch(err => alert('Whoops! Something is not correctly inputteded.'));
+        .catch(error     => alert('Whoops! Something is not correctly inputteded.'));
     console.log('request sent');
 };
 
@@ -66,7 +145,13 @@ function getPackageInfo(newTrackingNum, carrier) {
 
 
 
-/************************* Listener **********************************************/
+/************************* EVENT LISTENERS **********************************************/
+
+function handlePackageList() {
+    renderPackageList();
+    handleDeleteItem();
+    watchForm();
+}
 
 
 function watchForm() {
@@ -76,11 +161,10 @@ function watchForm() {
         const carrier = $('#js-carrier-input').val();
         console.log('input received')
         getPackageInfo(newTrackingNum, carrier);
-
     })
 };
 
 
 
 
-$(watchForm);
+$(handlePackageList);

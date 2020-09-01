@@ -28,9 +28,31 @@ li, img {
     max-width: 500px;
 }
 
+#package-list-item {
+    width: 250px;
+}
+
 .container {
     max-width: 600px;
     margin: 0 auto;
+}
+
+.package-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.package-list > li {
+    margin-bottom: 20px;
+    border: 1px solid grey;
+    padding: 20px;
+}
+
+.package-item{
+    display: block;
+    color: grey;
+    font-size: 20px;
+    margin-bottom: 15px;
 }
 
 .error-message {
