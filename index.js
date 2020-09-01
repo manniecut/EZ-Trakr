@@ -17,6 +17,7 @@ const searchUrl = "https://trackingmore.p.rapidapi.com/packages/track";
 
 const STORE = [
     {trackingNum: "EX-12345698", status: "DELIVERED", date: "2020-08-28 16:21", description: "Your fake package was delivered in or at your doorstep"},
+    {trackingNum: "8342704440", status: "TRANSIT", date: "2020-09-01 04:11:00", description: "Arrived at Sort Facility HONG KONG - HONG KONG SAR, CHINA"}
 ];
 
 
