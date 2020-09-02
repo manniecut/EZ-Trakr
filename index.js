@@ -1,7 +1,5 @@
 /*
  TO DO
-    -make entire list refreshable
- MAYBE
     -add store cookie functionality
     -show/hide description and map
 */
@@ -11,18 +9,19 @@
 'use strict';
 
 const apiKeyTracking = "c5128df5b0msh18188fd61436bc7p13b97fjsn8f4c632a3599";
-const apiKeyMaps = "AIzaSyC5q4AzjnRDhf53nceGVJBJPRbBVZyDS5U"
+const apiKeyMaps = "AIzaSyC5q4AzjnRDhf5XXXXXXXXX3nceGVJBJPRbBVZyDS5U"
 
 const searchUrl = "https://order-tracking.p.rapidapi.com/trackings/realtime";
 
 const STORE = [
     {
         nickName: "Drone Parts from GetFPV",
-        trackingNum: "EX-12345698",
+        trackingNum: "9405511108296806521993",
         status: "DELIVERED",
         date: "2020-08-28 16:21",
         description: "Your fake package is in or at your doorstep",
-        location: "ROMULUS, MI - USA"
+        location: "ROMULUS, MI - USA",
+        carrier: "usps"
     },
     {
         nickName: "Books from eBay",
@@ -30,7 +29,8 @@ const STORE = [
         status: "TRANSIT",
         date: "2020-09-01 04:11:00",
         description: "Arrived at Sort Facility HONG KONG - HONG KONG SAR, CHINA",
-        location: "HONG KONG - HONG KONG SAR, CHINA"
+        location: "HONG KONG - HONG KONG SAR, CHINA",
+        carrier: "dhl"
     }
 ];
 
@@ -78,7 +78,7 @@ function getItemIdFromElement(item) {
 
 
 
-/********* REMOVE LIST ITEM BUTTON *********/
+/********* LIST ITEM BUTTONS *********/
 
 function deleteListItem(itemId) {
     console.log(`deleteListItem`)
@@ -98,6 +98,28 @@ function handleDeleteItem() {
 }
 
 
+function refreshList() {
+    let previousData = STORE;
+    for (let i = 0; i < previousData.length; i++) {
+        STORE.splice(i, 1);
+        getPackageInfo(previousData[i].trackingNum, previousData[i].carrier, previousData[i].nickName)
+    }
+    //loop through store items
+    //for each item, run getpackageinfo with properinputs
+    //clear list, but when? maybe once per item during the loop
+    
+
+}
+
+function handleRefreshButton() {
+    $('#packages').on('click', '.js-list-refresh', event => {
+        console.log('clicked refresh')
+        refreshList();
+
+    });
+
+}
+
 
 /********************* ADDING RESPONSE INFORMATION TO THE LIST *****************************/
 
@@ -109,7 +131,8 @@ function addNumToStore(responseJson, packageNickName) {     //adds information f
         status: (responseJson.data.items[0].status).toUpperCase(),
         date: responseJson.data.items[0].origin_info.trackinfo[0].Date,
         description: responseJson.data.items[0].origin_info.trackinfo[0].StatusDescription,
-        location: responseJson.data.items[0].origin_info.trackinfo[0].Details
+        location: responseJson.data.items[0].origin_info.trackinfo[0].Details,
+        carrier: responseJson.data.items[0].carrier_code
     });
 }
 
@@ -154,11 +177,13 @@ function getMap(location) {
     console.log('getting map');
     let locationEncoded = encodeURI(location)
     console.log(locationEncoded);
-    let mapsURL = `https://www.google.com/maps/embed/v1/search?key=${apiKeyMaps}&q=${locationEncoded}`    
+    let mapsURL = `https://www.google.com/maps/embed/v1/search?key=${apiKeyMaps}&q=${locationEncoded}`
     console.log(mapsURL);
     return mapsURL;
 
 }
+
+
 
 
 
@@ -168,6 +193,7 @@ function getMap(location) {
 function handlePackageList() {
     renderPackageList();
     handleDeleteItem();
+    handleRefreshButton();
     watchForm();
 }
 
