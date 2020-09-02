@@ -11,8 +11,8 @@
 
 'use strict';
 
-const apiKey = "1d62dcc4ccmsh8f65dfaa7cbec97p1a038cjsnc4b64aed5049";
-const searchUrl = "https://trackingmore.p.rapidapi.com/packages/track";
+const apiKey = "c5128df5b0msh18188fd61436bc7p13b97fjsn8f4c632a3599";
+const searchUrl = "https://order-tracking.p.rapidapi.com/trackings/realtime";
 
 const STORE = [
     {
@@ -108,6 +108,7 @@ function addNumToStore(responseJson, packageNickName) {     //adds information f
 
 function displayResults(responseJson, packageNickName) {   //stores response data and refreshes the displayed list
     console.log('displayResults')
+    console.log(responseJson)
     addNumToStore(responseJson, packageNickName);
     renderPackageList();
 }
@@ -116,33 +117,31 @@ function displayResults(responseJson, packageNickName) {   //stores response dat
 
 /************************ REQUEST FUNCTIONS *********************************************/
 
-function formatQueryString(params) {      //
-    console.log('running formatQueryString')
-    const queryParts = Object.keys(params)
-        .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`);
-    return queryParts.join('&');
-}
 
 function getPackageInfo(newTrackingNum, carrier, packageNickName) { //gets the information then runs JSON through displayReults
     console.log('running getPackageInfo');
     console.log(carrier);
-    const params = {
-        trackingNumber: newTrackingNum,
-        carrierCode: carrier
+    var myHeaders = new Headers();
+    myHeaders.append("x-rapidapi-host", " order-tracking.p.rapidapi.com");
+    myHeaders.append("x-rapidapi-key", ` ${apiKey}`);
+    myHeaders.append("content-type", " application/json");
+
+    var bodyString = `{
+        "tracking_number": "${newTrackingNum}",
+        "carrier_code": "${carrier}"
+    }`
+
+    var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: bodyString,
+        redirect: 'follow'
     };
-    console.log('params object set')
-    const queryString = formatQueryString(params);
-    const url = searchUrl + '?' + queryString;
-    const options = {
-        headers: new Headers({
-            "x-rapidapi-host": "trackingmore.p.rapidapi.com",
-            "x-rapidapi-key": apiKey
-        })
-    };
-    fetch(url, options)
+
+    fetch(searchUrl, requestOptions)
         .then(response => response.json())
         .then(responseJson => displayResults(responseJson, packageNickName))
-        .catch(error => alert('Whoops! Something is not correctly inputteded.'));
+        .catch(error => alert('Whoops! Something is incorrect. Please double check your input and try again.'));
     console.log('request sent');
 };
 
