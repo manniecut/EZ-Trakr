@@ -3,15 +3,16 @@
     -make entire list refreshable
  MAYBE
     -add store cookie functionality
-    -add map of current city location
-    
+    -show/hide description and map
 */
 
 
 
 'use strict';
 
-const apiKey = "c5128df5b0msh18188fd61436bc7p13b97fjsn8f4c632a3599";
+const apiKeyTracking = "c5128df5b0msh18188fd61436bc7p13b97fjsn8f4c632a3599";
+const apiKeyMaps = "AIzaSyC5q4AzjnRDhf53nceGVJBJPRbBVZyDS5U"
+
 const searchUrl = "https://order-tracking.p.rapidapi.com/trackings/realtime";
 
 const STORE = [
@@ -20,14 +21,16 @@ const STORE = [
         trackingNum: "EX-12345698",
         status: "DELIVERED",
         date: "2020-08-28 16:21",
-        description: "Your fake package is in or at your doorstep"
+        description: "Your fake package is in or at your doorstep",
+        location: "ROMULUS, MI - USA"
     },
     {
         nickName: "Books from eBay",
         trackingNum: "8342704440",
         status: "TRANSIT",
         date: "2020-09-01 04:11:00",
-        description: "Arrived at Sort Facility HONG KONG - HONG KONG SAR, CHINA"
+        description: "Arrived at Sort Facility HONG KONG - HONG KONG SAR, CHINA",
+        location: "HONG KONG - HONG KONG SAR, CHINA"
     }
 ];
 
@@ -37,12 +40,15 @@ const STORE = [
 
 function generateItemElement(item) {              //formats the STORED items for use in the list
     console.log('generateItemElement');
+    let mapDisplay = getMap(item.location)
     return `
     <li data-item-id="${item.trackingNum}">
       <span class="package-item js-package-item">${item.trackingNum}</span>
             <h3>${item.nickName}</h3>
             <p>${item.status} - ${item.date}</p>
             <p>${item.description}</p>
+            <p>${item.location}</p>
+            <iframe src="${mapDisplay}"></iframe>
       <div class="package-item-controls">
         <button class="package-item-delete js-item-delete">
             <span class="button-label">Remove</span>
@@ -102,7 +108,8 @@ function addNumToStore(responseJson, packageNickName) {     //adds information f
         trackingNum: responseJson.data.items[0].tracking_number,
         status: (responseJson.data.items[0].status).toUpperCase(),
         date: responseJson.data.items[0].origin_info.trackinfo[0].Date,
-        description: responseJson.data.items[0].origin_info.trackinfo[0].StatusDescription
+        description: responseJson.data.items[0].origin_info.trackinfo[0].StatusDescription,
+        location: responseJson.data.items[0].origin_info.trackinfo[0].Details
     });
 }
 
@@ -123,14 +130,12 @@ function getPackageInfo(newTrackingNum, carrier, packageNickName) { //gets the i
     console.log(carrier);
     var myHeaders = new Headers();
     myHeaders.append("x-rapidapi-host", " order-tracking.p.rapidapi.com");
-    myHeaders.append("x-rapidapi-key", ` ${apiKey}`);
+    myHeaders.append("x-rapidapi-key", ` ${apiKeyTracking}`);
     myHeaders.append("content-type", " application/json");
-
     var bodyString = `{
         "tracking_number": "${newTrackingNum}",
         "carrier_code": "${carrier}"
     }`
-
     var requestOptions = {
         method: 'POST',
         headers: myHeaders,
@@ -141,9 +146,20 @@ function getPackageInfo(newTrackingNum, carrier, packageNickName) { //gets the i
     fetch(searchUrl, requestOptions)
         .then(response => response.json())
         .then(responseJson => displayResults(responseJson, packageNickName))
-        .catch(error => alert('Whoops! Something is incorrect. Please double check your input and try again.'));
+        .catch(error => alert('Please check that your tracking number and carrier match and try again.'));
     console.log('request sent');
 };
+
+function getMap(location) {
+    console.log('getting map');
+    let locationEncoded = encodeURI(location)
+    console.log(locationEncoded);
+    let mapsURL = `https://www.google.com/maps/embed/v1/search?key=${apiKeyMaps}&q=${locationEncoded}`    
+    console.log(mapsURL);
+    return mapsURL;
+
+}
+
 
 
 
