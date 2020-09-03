@@ -24,8 +24,9 @@ const STORE = [
 
 function loadLocalStorage() {
     console.log('function loadLocalStorage()')
-    let currentLength = STORE.length;
-    if (currentLength > 0) {
+    let currentLength = STORE.length
+    console.log(currentLength);
+    if (currentLength !== null) {
         console.log('parsing local storage')
         let loadedStore = JSON.parse(localStorage.getItem("storeString")); //create a variable that contains the parsed stored item
         console.log('the loaded storage is:');
