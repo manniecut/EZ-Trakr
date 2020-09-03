@@ -1,3 +1,10 @@
+/*
+ Style Goals
+    -show/hide description and map
+    -scroll list but not buttons
+*/
+
+
 * {
     box-sizing: border-box;
 }
@@ -18,10 +25,13 @@ ul {
     list-style: none;
     padding: 0;
     margin: 0;
+    align-content: center;
 }
 
 li {
     padding: 10px;
+    margin: 0;
+    align-content: center;
 }
 
 li, img {
