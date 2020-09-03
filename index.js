@@ -19,7 +19,7 @@ function loadLocalStorage() {
     console.log('the loaded storage is:');
     console.log(loadedStore);
     let currentStoreLength = STORE.length;
-    if (loadedStore.length <= 0) {
+    if (loadedStore <= 0) {
         console.log('nothing saved');
     } else {
         STORE.splice(0, currentStoreLength);
