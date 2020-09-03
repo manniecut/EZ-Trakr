@@ -6,17 +6,7 @@ const apiKeyMaps = "AIzaSyC5q4AzjnRDhf53nceGVJBJPRbBVZyDS5U"
 const searchUrl = "https://order-tracking.p.rapidapi.com/trackings/realtime";
 
 
-const STORE = [
-    {
-        nickName: "null",
-        trackingNum: "null",
-        status: "null",
-        date: "null",
-        description: "null",
-        location: "null",
-        carrier: "null"
-    },
-];
+const STORE = [];
 
 
 
@@ -24,22 +14,21 @@ const STORE = [
 
 function loadLocalStorage() {
     console.log('function loadLocalStorage()')
-    let currentLength = STORE.length
-    console.log(currentLength);
-    if (currentLength !== null) {
-        console.log('parsing local storage')
-        let loadedStore = JSON.parse(localStorage.getItem("storeString")); //create a variable that contains the parsed stored item
-        console.log('the loaded storage is:');
-        console.log(loadedStore);
-        STORE.splice(0, currentLength);
-        console.log('store spliced');
+    console.log('parsing local storage')
+    let loadedStore = JSON.parse(localStorage.getItem("storeString")); //create a variable that contains the parsed stored item
+    console.log('the loaded storage is:');
+    console.log(loadedStore);
+    let currentStoreLength = STORE.length;
+    if (loadedStore.length <= 0) {
+        console.log('nothing saved');
+    } else {
+        STORE.splice(0, currentStoreLength);
+        console.log('STORE cleared');
         for (let i = 0; i < loadedStore.length; i++) {
             STORE.push(loadedStore[i]);
             console.log('loading stored object into STORE')
         }
-        console.log('loading complete')
-    } else {
-        console.log('nothing saved');
+       console.log('loading complete')
     };
 };
 
