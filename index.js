@@ -51,11 +51,11 @@ function generateItemElement(item) {              //formats the STORED items for
     let mapDisplay = getMap(item.location)
     return `
     <li data-item-id="${item.trackingNum}">
-      <span class="package-item js-package-item">${item.trackingNum}/${item.carrier}</span>
-            <h3>${item.nickName}</h3>
-            <p>${item.status} - ${item.date}</p>
-            <p>${item.description}</p>
-            <p>${item.location}</p>
+      <span class="package-item js-package-item tracking-title">${item.carrier.toUpperCase()} ${item.trackingNum}</span>
+            <h3 class="li-nickname">${item.nickName}</h3>
+            <p class="li-status">${item.status} - ${item.date}</p>
+            <p class="li-description">${item.description}</p>
+            <p class="li-location">${item.location}</p>
             <iframe src="${mapDisplay}"></iframe>
       <div class="package-item-controls">
         <button class="package-item-delete js-item-delete">
@@ -113,7 +113,7 @@ function refreshList() {
 };
 
 function handleRefreshButton() {
-    $('#packages').on('click', '.js-list-refresh', event => {
+    $('#header').on('click', '.js-list-refresh', event => {
         refreshList();
     });
 

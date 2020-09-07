@@ -14,44 +14,47 @@
 
 
     <div class="container">
-        <h1>Package List</h1>
+        <h1>EZ Trakr</h1>
+        <header id="header">
+            <form id="js-form">
+                <label for="nickname-input">Package Name:</label>
+                <input type="text" name="nickname-input" id="js-nickname-input"
+                    placeholder="(e.g. my new book, antique vase)" required>
+                <br><br>
+                <label for="number-input">Tracking Number:</label>
+                <input type="text" name="number-input" id="js-number-input" required>
+                <br><br>
+                <label for="carrier-input">Choose a carrier:</label>
+                <select name="carrier-input" id="js-carrier-input">
+                    <option value="usps">USPS</option>
+                    <option value="fedex">FEDEX</option>
+                    <option value="ups">UPS</option>
+                    <option value="dhl">DHL</option>
+                </select>
+                <input type="submit" value="Add to List!">
+            </form>
 
-        <form id="js-form">
-            <label for="nickname-input">Package Name:</label>
-            <input type="text" name="nickname-input" id="js-nickname-input" placeholder="(e.g. my new book, antique vase)" required>
-            <br><br>
-            <label for="number-input">Tracking Number:</label>
-            <input type="text" name="number-input" id="js-number-input" required>
-            <br><br>
-            <label for="carrier-input">Choose a carrier:</label>
-            <select name="carrier-input" id="js-carrier-input">
-                <option value="usps">USPS</option>
-                <option value="fedex">FEDEX</option>
-                <option value="ups">UPS</option>
-                <option value="dhl">DHL</option>
-            </select>
-            <input type="submit" value="Add to List!">
-            
-      
-        </form>
+            <button class="package-list-refresh js-list-refresh float">
+                <span class="button-label my-float">Refresh</span>
+            </button>
+
+
+        </header>
 
         <p id="js-error-message" class="error-message"></p>
 
         <section id="packages">
             <ul id="package-list" class="package-list js-package-list">
             </ul>
-           
-            <button class="package-list-refresh js-list-refresh">
-                <span class="button-label">Refresh</span>
-            </button>
         </section>
 
 
     </div>
+
+
     <script src="https://code.jquery.com/jquery-3.3.1.js"
-        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-        crossorigin="anonymous">
-    </script>
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous">
+        </script>
     <script src="index.js"></script>
 </body>
 
