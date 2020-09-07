@@ -28,7 +28,7 @@ function loadLocalStorage() {
             STORE.push(loadedStore[i]);
             console.log('loading stored object into STORE')
         }
-       console.log('loading complete')
+        console.log('loading complete')
     };
 };
 
@@ -52,11 +52,13 @@ function generateItemElement(item) {              //formats the STORED items for
     return `
     <li data-item-id="${item.trackingNum}">
       <span class="package-item js-package-item tracking-title">${item.carrier.toUpperCase()} ${item.trackingNum}</span>
-            <h3 class="li-nickname">${item.nickName}</h3>
+            <h3 class="li-nickname">${item.nickName}</h3><hr>
             <p class="li-status">${item.status} - ${item.date}</p>
+            <div>
             <p class="li-description">${item.description}</p>
             <p class="li-location">${item.location}</p>
             <iframe src="${mapDisplay}"></iframe>
+            </div>
       <div class="package-item-controls">
         <button class="package-item-delete js-item-delete">
             <span class="button-label">Remove</span>
@@ -84,6 +86,18 @@ function getItemIdFromElement(item) {
         .closest('li')
         .data('item-id');
 }
+
+function handleShowHide() {
+    $('#header').on('click', '.js-list-refresh', event => {
+        refreshList();
+    });
+    $("#hide").on('click', '.js-show-hide',event=> {
+        $("p").hide();
+    });
+    $("#show").click(function () {
+        $("p").show();
+    });
+};
 
 
 
@@ -191,6 +205,7 @@ function handlePackageList() {
     renderPackageList();
     handleDeleteItem();
     handleRefreshButton();
+    handleShowHide();
     watchForm();
 }
 
