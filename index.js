@@ -52,6 +52,7 @@ function generateItemElement(item) {              //formats the STORED items for
     return `
     <li data-item-id="${item.trackingNum}">
       <span class="package-item js-package-item tracking-title">${item.carrier.toUpperCase()} ${item.trackingNum}</span>
+    
             <h3 class="li-nickname">${item.nickName}</h3><hr>
             <p class="li-status">${item.status} - ${item.date}</p>
             <div>
@@ -59,6 +60,7 @@ function generateItemElement(item) {              //formats the STORED items for
             <p class="li-location">${item.location}</p>
             <iframe src="${mapDisplay}"></iframe>
             </div>
+        
       <div class="package-item-controls">
         <button class="package-item-delete js-item-delete">
             <span class="button-label">Remove</span>

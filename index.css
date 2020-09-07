@@ -12,7 +12,7 @@
 /***************************** HTML ELEMENTS *********************************/
 
 html {
-    background-image: radial-gradient(navy, purple);
+    background-image: linear-gradient(35deg, rgb(6, 177, 163),rgb(0, 255, 200));
 }
 
 body {
@@ -61,7 +61,7 @@ form {
     width: 100%;
     border: solid 3px black;
     border-radius: 4px;
-    background-image: linear-gradient(navy, gray);
+    background-image: linear-gradient(rgb(141, 141, 141), gray);
 }
 
 button, input[type="text"] {
@@ -151,7 +151,6 @@ iframe {
     margin-bottom: 20px;
     border: 1px solid grey;
     padding: 20px;
-    padding-top: 0px;
 }
 
 .package-item {
@@ -167,7 +166,7 @@ iframe {
     color: white;
     text-align: center;
     width: 100%;
-    background-image: linear-gradient(black, navy);
+    background-image: linear-gradient(rgb(36, 36, 36), rgb(82, 82, 82));
     border-radius: 2px;
 }
 
