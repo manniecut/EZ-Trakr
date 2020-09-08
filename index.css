@@ -1,10 +1,3 @@
-/*
- Style Goals
-    -show/hide description and map
-    -add logo   
-
-*/
-
 * {
     box-sizing: border-box;
 }
@@ -29,15 +22,15 @@ body, input, select, button, textarea {
     font-weight: 300;
 }
 
+button {
+    font-weight: 550;
+}
+
 header {
     line-height: 1.65;
     color: white;
     text-align: center;
     width: 500px;   
-}
-
-button {
-    font-weight: 500;
 }
 
 h1 {

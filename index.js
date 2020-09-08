@@ -90,18 +90,6 @@ function getItemIdFromElement(item) {
         .data('item-id');
 }
 
-function handleShowHide() {
-    $('#header').on('click', '.js-list-refresh', event => {
-        refreshList();
-    });
-    $("#hide").on('click', '.js-show-hide',event=> {
-        $("p").hide();
-    });
-    $("#show").click(function () {
-        $("p").show();
-    });
-};
-
 
 
 /********* LIST ITEM BUTTONS *********/
