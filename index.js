@@ -196,6 +196,7 @@ function getMap(location) {
 function handlePackageList() {
     console.log('SCRIPT INITIATING')
     loadLocalStorage();
+    refreshList();
     renderPackageList();
     handleDeleteItem();
     handleRefreshButton();
