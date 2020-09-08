@@ -12,7 +12,8 @@
 /***************************** HTML ELEMENTS *********************************/
 
 html {
-    background-image: linear-gradient(35deg, rgb(6, 177, 163),rgb(0, 255, 200));
+    background-color: rgb(6, 177, 163);
+    width: 100%;
 }
 
 body {
@@ -32,6 +33,7 @@ header {
     line-height: 1.65;
     color: white;
     text-align: center;
+    width: 500px;   
 }
 
 button {
@@ -61,7 +63,7 @@ form {
     width: 100%;
     border: solid 3px black;
     border-radius: 4px;
-    background-image: linear-gradient(rgb(141, 141, 141), gray);
+    background-image: linear-gradient(rgb(38,38,38), rgb(141,141,141));
 }
 
 button, input[type="text"] {
@@ -112,15 +114,8 @@ li {
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
     border-radius: 5px;
     background: white;
+    width: 500px;
 }
-
-/*ul li div {
-    display: none;
-}
-
-ul li:hover div {
-    display: block;
-}*/
 
 li, img {
     max-width: 500px;
@@ -160,10 +155,41 @@ iframe {
     margin-bottom: 15px;
 }
 
+.status-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0;
+}
+
+.li-nickname {
+    margin-bottom: 5px;
+}
+
+.li-status {
+    font-style: italic;
+    font-weight: 600;
+    color: rgb(88, 88, 88);
+    padding-bottom: 5px;
+}
+
+.li-status.item {
+    margin: 0;
+}
+
+.li-description {
+    margin: 0;
+}
+
+.li-location {
+    font-weight: 650;
+}
+
 /***************************** LIST ITEM SECTIONS *********************************/
 
 .tracking-title {
     color: white;
+    font-family: tahoma;
     text-align: center;
     width: 100%;
     background-image: linear-gradient(rgb(36, 36, 36), rgb(82, 82, 82));

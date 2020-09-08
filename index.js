@@ -52,9 +52,10 @@ function generateItemElement(item) {              //formats the STORED items for
     return `
     <li data-item-id="${item.trackingNum}">
       <span class="package-item js-package-item tracking-title">${item.carrier.toUpperCase()} ${item.trackingNum}</span>
-    
             <h3 class="li-nickname">${item.nickName}</h3><hr>
-            <p class="li-status">${item.status} - ${item.date}</p>
+            <div class="status-div">
+            <p class="li-status item">${item.status}</p><p class="li-status item">${item.date}</p>
+            </div>
             <div>
             <p class="li-description">${item.description}</p>
             <p class="li-location">${item.location}</p>
@@ -157,6 +158,9 @@ function displayResults(responseJson, packageNickName) {   //stores response dat
     console.log(responseJson)
     addNumToStore(responseJson, packageNickName);
     renderPackageList();
+    $('#js-number-input').val('');
+    $('#js-carrier-input').val('');
+    $('#js-nickname-input').val('');
 }
 
 
