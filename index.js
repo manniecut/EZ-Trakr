@@ -199,7 +199,6 @@ function handlePackageList() {
     renderPackageList();
     handleDeleteItem();
     handleRefreshButton();
-    handleShowHide();
     watchForm();
 }
 
