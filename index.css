@@ -26,7 +26,7 @@ header {
     line-height: 1.65;
     color: white;
     text-align: center;
-    width: 500px;   
+    width: 100%;
 }
 
 h1 {
@@ -52,7 +52,7 @@ form {
     width: 100%;
     border: solid 3px black;
     border-radius: 4px;
-    background-image: linear-gradient(rgb(38,38,38), rgb(141,141,141));
+    background-image: linear-gradient(rgb(38, 38, 38), rgb(141, 141, 141));
 }
 
 button, input[type="text"] {
@@ -102,23 +102,17 @@ li {
     padding-top: 0;
     margin: 0;
     align-content: center;
-    width: 150px;
     display: inline-block;
     width: 100%;
     border: solid 3px black;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
     border-radius: 5px;
     background: white;
-    width: 500px;
-}
-
-li, img {
-    max-width: 500px;
 }
 
 iframe {
     width: 100%;
-    height: 300px;
+    height: 100px;
 }
 
 /*****************************  *********************************/
@@ -128,7 +122,7 @@ iframe {
 }
 
 .container {
-    max-width: 500px;
+    width: 100%;
     margin: 0 auto;
 }
 
@@ -195,3 +189,17 @@ iframe {
     font-size: 14px;
 }
 
+@media all and (min-width: 600px) {
+    header {
+        width: 500px;
+    }
+    iframe {
+        height: 300px;
+    }
+    li {
+        width: 500px;
+    }
+    .container {
+        max-width: 500px;
+}
+}
