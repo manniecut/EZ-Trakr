@@ -10,7 +10,7 @@ This is an app that keeps track of all of your packages that are in transit.
 
 ## How to Use It
 You will need valid tracking information to use it. Luckily I have a tracking number handy for you:
-- 8342704440 for carrier DHL
+8342704440 for carrier DHL
 
 * Input your tracking information into the form
 * Your item will be added to the list
