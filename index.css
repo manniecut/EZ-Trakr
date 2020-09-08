@@ -6,7 +6,6 @@
 
 html {
     background-color: rgb(6, 177, 163);
-    width: 100%;
 }
 
 body {
@@ -14,17 +13,13 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin:0;
+    width: 100%;
 }
 
-body, input, select, button, textarea {
+body, input, select, textarea {
     font-family: "Open Sans", Arial, Helvetica, sans-serif;
     font-size: 13pt;
     font-weight: 300;
-}
-
-button {
-    font-weight: 550;
 }
 
 header {
@@ -65,6 +60,12 @@ button, input[type="text"] {
     width: 100%;
 }
 
+button {
+    font-weight: 550;
+    font-family: "Open Sans", Arial, Helvetica, sans-serif;
+    font-size: 13pt;
+}
+
 button:hover {
     cursor: pointer;
 }
@@ -91,7 +92,7 @@ button:hover {
 ul {
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin-top: 20px;
     margin-bottom: 100px;
     align-content: center;
 }
@@ -194,12 +195,3 @@ iframe {
     font-size: 14px;
 }
 
-/*****************************  *********************************/
-
-.error-message {
-    color: red;
-}
-
-.hidden {
-    display: none;
-}
