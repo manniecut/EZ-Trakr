@@ -1,5 +1,4 @@
-# tracking-project
-API project
+# EZ-Trakr
 
 This is an app that keeps track of all of your packages that are in transit.
 
