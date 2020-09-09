@@ -10,8 +10,8 @@ This is an app that keeps track of all of your packages that are in transit.
 
 ## How to Use It
 You will need valid tracking information to use it. Here is a sample for you to use:<br>
-8342704440 for carrier DHL<br>
-9200190265114643293010 for carrier USPS<br>
+  **8342704440** for carrier **DHL**<br>
+  **9200190265114643293010** for carrier **USPS**<br>
 
 * Input your tracking information into the form
 * Your item will be added to the list
