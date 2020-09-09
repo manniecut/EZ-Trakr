@@ -25,6 +25,7 @@ You will need valid tracking information to use it. Luckily I have a tracking nu
 ## This App Uses:
 * Package Tracking API from RapidAPI
 * Google Maps Embed API
+* Web Storage API
 * Javascript
 * HTML
 * CSS
