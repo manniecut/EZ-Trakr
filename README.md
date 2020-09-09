@@ -6,7 +6,7 @@ This is an app that keeps track of all of your packages that are in transit.
 - [Live Demo](https://manniecut.github.io/EZ-Trakr/)
 
 ## How it Looks
-![EZ-trakr](https://user-images.githubusercontent.com/68138888/92439193-5a34ca00-f178-11ea-9c55-a12de1fe0546.png)
+![EZ-trakr](https://user-images.githubusercontent.com/68138888/92570854-64c29280-f250-11ea-9101-5b91f4bbc379.png)
 
 ## How to Use It
 You will need valid tracking information to use it. Here is a sample for you to use:
