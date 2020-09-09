@@ -130,7 +130,7 @@ function handleRefreshButton() {
 
 function addNumToStore(responseJson, packageNickName) {     //adds information from responseJson to the STORE
     console.log(`function addNumToStore() for "${packageNickName}"`);
-    STORE.push({
+    STORE.unshift({
         nickName: packageNickName,
         trackingNum: responseJson.data.items[0].tracking_number,
         status: (responseJson.data.items[0].status).toUpperCase(),
