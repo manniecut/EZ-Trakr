@@ -9,8 +9,9 @@ This is an app that keeps track of all of your packages that are in transit.
 ![EZ-trakr](https://user-images.githubusercontent.com/68138888/92570854-64c29280-f250-11ea-9101-5b91f4bbc379.png)
 
 ## How to Use It
-You will need valid tracking information to use it. Here is a sample for you to use:
-8342704440 for carrier DHL
+You will need valid tracking information to use it. Here is a sample for you to use:<br>
+8342704440 for carrier DHL<br>
+9200190265114643293010 for carrier USPS<br>
 
 * Input your tracking information into the form
 * Your item will be added to the list
