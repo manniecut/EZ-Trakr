@@ -77,7 +77,8 @@ input[type="submit"] {
 button:hover {
     cursor: pointer;
     border: 14px;
-    background-color: rgb(104, 104, 104)
+    background-color: rgb(104, 104, 104);
+    transition: all 100ms ease-out;
 }
 
 .float {
@@ -109,6 +110,7 @@ button:hover {
 }
 
 .dropbtn:hover {
+    transition: all 100ms ease-out;
     background-color: #999999;
 }
 

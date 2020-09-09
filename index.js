@@ -40,7 +40,7 @@ function saveToLocalStorage() {
     localStorage.setItem("storeString", storeString);
     console.log('localStorage =')
     console.log(localStorage);
-}
+};
 
 
 
@@ -88,7 +88,7 @@ function getItemIdFromElement(item) {
     return $(item)
         .closest('li')
         .data('item-id');
-}
+};
 
 
 
@@ -100,15 +100,7 @@ function deleteListItem(itemId) {
     console.log(itemIndex);
     STORE.splice(itemIndex, 1);
     renderPackageList();
-}
-
-function handleDeleteItem() {
-    $('.js-package-list').on('click', '.js-item-delete', event => {
-        const itemId = getItemIdFromElement(event.currentTarget);
-        console.log(itemId);
-        deleteListItem(itemId);
-    });
-}
+};
 
 function refreshList() {
     console.log('**REFRESH**');
@@ -119,25 +111,10 @@ function refreshList() {
     STORE.splice(0, previousData.length);
 };
 
-function handleRefreshButton() {
-    $('#header').on('click', '.js-list-refresh', event => {
-        refreshList();
-    });
-
-}
-
 function newPackageMenu() {
     document.getElementById("dropmenu").classList.toggle("show");
-    console.log('menu toggle')
-
-}
-
-function handleNewPackageMenu() {
-    $('#header').on('click', '.js-new-package-menu', event => {
-        console.log('handleNewPackageMenu()')
-        newPackageMenu();
-    })
-}
+    console.log('menu toggle');
+};
 
 
 
@@ -154,7 +131,7 @@ function addNumToStore(responseJson, packageNickName) {     //adds information f
         location: responseJson.data.items[0].origin_info.trackinfo[0].Details,
         carrier: responseJson.data.items[0].carrier_code
     });
-}
+};
 
 function displayResults(responseJson, packageNickName) {   //stores response data and refreshes the displayed list
     console.log(`function displayResults() for "${packageNickName}`);
@@ -164,8 +141,7 @@ function displayResults(responseJson, packageNickName) {   //stores response dat
     $('#js-number-input').val('');
     $('#js-carrier-input').val('');
     $('#js-nickname-input').val('');
-    newPackageMenu();
-}
+};
 
 
 
@@ -202,8 +178,7 @@ function getMap(location) {
     let mapsURL = `https://www.google.com/maps/embed/v1/search?key=${apiKeyMaps}&q=${locationEncoded}`
     console.log('retrieving Map from ' + mapsURL);
     return mapsURL;
-
-}
+};
 
 
 
@@ -218,7 +193,28 @@ function handlePackageList() {
     handleDeleteItem();
     handleRefreshButton();
     watchForm();
-}
+};
+
+function handleDeleteItem() {
+    $('.js-package-list').on('click', '.js-item-delete', event => {
+        const itemId = getItemIdFromElement(event.currentTarget);
+        console.log(itemId);
+        deleteListItem(itemId);
+    });
+};
+
+function handleRefreshButton() {
+    $('#header').on('click', '.js-list-refresh', event => {
+        refreshList();
+    });
+};
+
+function handleNewPackageMenu() {
+    $('#header').on('click', '.js-new-package-menu', event => {
+        console.log('handleNewPackageMenu()')
+        newPackageMenu();
+    })
+};
 
 function watchForm() {
     $('form').submit(event => {
@@ -228,6 +224,7 @@ function watchForm() {
         const packageNickName = $('#js-nickname-input').val();
         console.log('**NEW SUBMISSION**')
         getPackageInfo(newTrackingNum, carrier, packageNickName);
+        newPackageMenu();
     })
 };
 
