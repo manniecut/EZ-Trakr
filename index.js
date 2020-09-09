@@ -95,9 +95,11 @@ function getItemIdFromElement(item) {
 /********* LIST ITEM BUTTONS *********/
 
 function deleteListItem(itemId) {
-    console.log(`**DELETE**`)
-    const itemIndex = STORE.findIndex(item => item.trackingNum === itemId);
+    console.log(`**DELETE** - ${itemId}`)
+    const itemIndex = STORE.findIndex(item => (item.trackingNum) == itemId);
+    console.log(itemIndex);
     STORE.splice(itemIndex, 1);
+    renderPackageList();
 }
 
 function handleDeleteItem() {
@@ -105,7 +107,6 @@ function handleDeleteItem() {
         const itemId = getItemIdFromElement(event.currentTarget);
         console.log(itemId);
         deleteListItem(itemId);
-        renderPackageList();
     });
 }
 
@@ -127,7 +128,7 @@ function handleRefreshButton() {
 
 function newPackageMenu() {
     document.getElementById("dropmenu").classList.toggle("show");
-    console.log('showing menu')
+    console.log('menu toggle')
 
 }
 
@@ -137,6 +138,7 @@ function handleNewPackageMenu() {
         newPackageMenu();
     })
 }
+
 
 
 /********************* ADDING RESPONSE INFORMATION TO THE LIST *****************************/
@@ -162,6 +164,7 @@ function displayResults(responseJson, packageNickName) {   //stores response dat
     $('#js-number-input').val('');
     $('#js-carrier-input').val('');
     $('#js-nickname-input').val('');
+    newPackageMenu();
 }
 
 
@@ -209,7 +212,7 @@ function getMap(location) {
 function handlePackageList() {
     console.log('SCRIPT INITIATING')
     loadLocalStorage();
-    //refreshList();
+    refreshList();
     renderPackageList();
     handleNewPackageMenu();
     handleDeleteItem();
