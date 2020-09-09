@@ -8,14 +8,6 @@ html {
     background-color: rgb(6, 177, 163);
 }
 
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
-}
-
 body, input, select, textarea {
     font-family: "Open Sans", Arial, Helvetica, sans-serif;
     font-size: 13pt;
@@ -23,10 +15,12 @@ body, input, select, textarea {
 }
 
 header {
+    position: sticky;
+    top: 10px;
     line-height: 1.65;
     color: white;
     text-align: center;
-    width: 100%;
+    z-index: 1;
 }
 
 h1 {
@@ -35,6 +29,7 @@ h1 {
     color: white;
     font-style: oblique;
     letter-spacing: 15px;
+    overflow: hidden;
 }
 
 h3, p {
@@ -44,30 +39,44 @@ h3, p {
 /***************************** FORM AND BUTTONS *********************************/
 
 form {
+    display: flex;
+    flex-wrap: wrap;
+    font-weight: 550;
     padding: 10px;
     padding-top: 0;
     margin: 0;
-    align-content: center;
     display: inline-block;
-    width: 100%;
     border: solid 3px black;
     border-radius: 4px;
     background-image: linear-gradient(rgb(38, 38, 38), rgb(141, 141, 141));
+    z-index: 1;
 }
 
-button, input[type="text"] {
+input[type="text"], select {
     padding: 10px;
     width: 100%;
+    border: 0;
 }
 
-button {
+button, input[type="submit"] {
     font-weight: 550;
     font-family: "Open Sans", Arial, Helvetica, sans-serif;
     font-size: 13pt;
+    padding: 10px;
+    width: 100%;
+    border: 0;
+    background-color: rgb(148, 148, 148);
+}
+
+input[type="submit"] {
+    margin-top: 12px;
+    border: solid 1px black;
 }
 
 button:hover {
     cursor: pointer;
+    border: 14px;
+    background-color: rgb(104, 104, 104)
 }
 
 .float {
@@ -87,20 +96,56 @@ button:hover {
     margin-top: 22px;
 }
 
+.dropbtn {
+    background-color: #313131;
+    color: #FFF;
+    border-radius: 10px;
+    min-width: 100%;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropbtn:hover {
+    background-color: #999999;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.dropdown-content {
+    transition: all 300ms ease-out;
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+}
+
+.show {
+    opacity: 1;
+}
+
 /***************************** LIST ITEMS *********************************/
 
 ul {
+    display: flex;
+    flex-direction: column;
     list-style: none;
     padding: 0;
     margin-top: 20px;
     margin-bottom: 100px;
     align-content: center;
+    z-index: 2;
 }
 
 li {
     padding: 10px;
     padding-top: 0;
-    margin: 0;
+    margin:0;
     align-content: center;
     display: inline-block;
     width: 100%;
@@ -144,6 +189,8 @@ iframe {
     margin-bottom: 15px;
 }
 
+/******** LIST ITEM STYLING ***********/
+
 .status-div {
     display: flex;
     flex-direction: row;
@@ -174,15 +221,15 @@ iframe {
     font-weight: 650;
 }
 
-/***************************** LIST ITEM SECTIONS *********************************/
-
 .tracking-title {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: white;
-    font-family: tahoma;
-    text-align: center;
+    padding: 4px;
     width: 100%;
     background-image: linear-gradient(rgb(36, 36, 36), rgb(82, 82, 82));
     border-radius: 2px;
+    text-align: center;
+    overflow: hidden;
 }
 
 .li-description {
@@ -192,14 +239,21 @@ iframe {
 @media all and (min-width: 600px) {
     header {
         width: 500px;
+        flex-direction: row;
     }
     iframe {
         height: 300px;
     }
+    /*ul {
+        flex-direction: row;
+    }*/
     li {
         width: 500px;
     }
     .container {
         max-width: 500px;
+    }
+    .package-list>li {
+        width: 500px;
     }
 }

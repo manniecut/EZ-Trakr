@@ -51,7 +51,7 @@ function generateItemElement(item) {              //formats the STORED items for
     let mapDisplay = getMap(item.location)
     return `
     <li data-item-id="${item.trackingNum}">
-      <span class="package-item js-package-item tracking-title">${item.carrier.toUpperCase()} ${item.trackingNum}</span>
+      <span class="package-item js-package-item tracking-title">${item.carrier.toUpperCase()} / / ${item.trackingNum}</span>
             <h3 class="li-nickname">${item.nickName}</h3><hr>
             <div class="status-div">
             <p class="li-status item">${item.status}</p><p class="li-status item">${item.date}</p>
@@ -103,6 +103,7 @@ function deleteListItem(itemId) {
 function handleDeleteItem() {
     $('.js-package-list').on('click', '.js-item-delete', event => {
         const itemId = getItemIdFromElement(event.currentTarget);
+        console.log(itemId);
         deleteListItem(itemId);
         renderPackageList();
     });
@@ -124,6 +125,18 @@ function handleRefreshButton() {
 
 }
 
+function newPackageMenu() {
+    document.getElementById("dropmenu").classList.toggle("show");
+    console.log('showing menu')
+
+}
+
+function handleNewPackageMenu() {
+    $('#header').on('click', '.js-new-package-menu', event => {
+        console.log('handleNewPackageMenu()')
+        newPackageMenu();
+    })
+}
 
 
 /********************* ADDING RESPONSE INFORMATION TO THE LIST *****************************/
@@ -196,8 +209,9 @@ function getMap(location) {
 function handlePackageList() {
     console.log('SCRIPT INITIATING')
     loadLocalStorage();
-    refreshList();
+    //refreshList();
     renderPackageList();
+    handleNewPackageMenu();
     handleDeleteItem();
     handleRefreshButton();
     watchForm();
