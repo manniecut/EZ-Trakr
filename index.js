@@ -52,7 +52,7 @@ function generateItemElement(item) {              //formats the STORED items for
     let mapDisplay = getMap(item.location)
     return `
     <li data-item-id="${item.trackingNum}">
-      <span class="package-item js-package-item tracking-title">${item.carrier.toUpperCase()} / / ${item.trackingNum}</span>
+      <span class="package-item js-package-item tracking-title">${item.carrier.toUpperCase()} <img class="title-icon" src="images/EZ-Trakr-icon.png"> ${item.trackingNum}</span>
             <h3 class="li-nickname">${item.nickName}</h3><hr>
             <div class="status-div">
             <p class="li-status item">${item.status}</p><p class="li-status item">${item.date}</p>

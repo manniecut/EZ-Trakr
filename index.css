@@ -250,6 +250,11 @@ iframe {
     overflow: hidden;
 }
 
+.title-icon {
+    width: auto;
+    height: 16px;
+}
+
 .li-description {
     font-size: 14px;
 }
