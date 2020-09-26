@@ -13,33 +13,34 @@ const STORE = [];
 /*********************** SAVE/LOAD FUNCTIONS ****************************************************/
 
 function loadLocalStorage() {
-    console.log('function loadLocalStorage()')
-    console.log('parsing local storage')
+    //console.log('function loadLocalStorage()')
+    //console.log('parsing local storage')
     let loadedStore = JSON.parse(localStorage.getItem("storeString")); //create a variable that contains the parsed stored item
-    console.log('the loaded storage is:');
-    console.log(loadedStore);
+    //console.log('the loaded storage is:');
+    //console.log(loadedStore);
     let currentStoreLength = STORE.length;
     if (loadedStore <= 0) {
-        console.log('nothing saved');
+        ////console.log('nothing saved');
+        newPackageMenu();
     } else {
         STORE.splice(0, currentStoreLength);
-        console.log('STORE cleared');
+        //console.log('STORE cleared');
         for (let i = 0; i < loadedStore.length; i++) {
             STORE.push(loadedStore[i]);
-            console.log('loading stored object into STORE')
+            //console.log('loading stored object into STORE')
         }
-        console.log('loading complete')
+        //console.log('loading complete')
     };
 };
 
 function saveToLocalStorage() {
-    console.log('function saveToLocalStorage()');
+    //console.log('function saveToLocalStorage()');
     let storeString = JSON.stringify(STORE);
-    console.log('storeString =');
-    console.log(storeString);
+    //console.log('storeString =');
+    //console.log(storeString);
     localStorage.setItem("storeString", storeString);
-    console.log('localStorage =')
-    console.log(localStorage);
+    //console.log('localStorage =')
+    //console.log(localStorage);
 };
 
 
@@ -47,7 +48,7 @@ function saveToLocalStorage() {
 /*********************** LIST FUNCTIONS ****************************************************/
 
 function generateItemElement(item) {              //formats the STORED items for use in the list
-    console.log(`function generateItemElement() for ${item.nickName}`);
+    //console.log(`function generateItemElement() for ${item.nickName}`);
     let mapDisplay = getMap(item.location)
     return `
     <li data-item-id="${item.trackingNum}">
@@ -71,20 +72,20 @@ function generateItemElement(item) {              //formats the STORED items for
 };
 
 function generatePackageItemsString(trackingStore) { // combines html elements generated from STORE items and returns them ready to be displayed
-    console.log('function generatePackageItemsString()');
+    //console.log('function generatePackageItemsString()');
     const items = trackingStore.map((item) => generateItemElement(item));
     return items.join("");
 };
 
 function renderPackageList() { // displays result of generatePackageItemsString in html area
     saveToLocalStorage(STORE);
-    console.log('function renderPackageList()');
+    //console.log('function renderPackageList()');
     const packageListItemsString = generatePackageItemsString(STORE);
     $('.js-package-list').html(packageListItemsString);     // this is the combined formatted HTML strings from STORE
 };
 
 function getItemIdFromElement(item) {
-    console.log('function getItemIdFromElement()');
+    //console.log('function getItemIdFromElement()');
     return $(item)
         .closest('li')
         .data('item-id');
@@ -95,15 +96,15 @@ function getItemIdFromElement(item) {
 /********* LIST ITEM BUTTONS *********/
 
 function deleteListItem(itemId) {
-    console.log(`**DELETE** - ${itemId}`)
+    //console.log(`**DELETE** - ${itemId}`)
     const itemIndex = STORE.findIndex(item => (item.trackingNum) == itemId);
-    console.log(itemIndex);
+    //console.log(itemIndex);
     STORE.splice(itemIndex, 1);
     renderPackageList();
 };
 
 function refreshList() {
-    console.log('**REFRESH**');
+    //console.log('**REFRESH**');
     let previousData = STORE;
     for (let i = 0; i < previousData.length; i++) {
         getPackageInfo(previousData[i].trackingNum, previousData[i].carrier, previousData[i].nickName);
@@ -113,7 +114,7 @@ function refreshList() {
 
 function newPackageMenu() {
     document.getElementById("dropmenu").classList.toggle("show");
-    console.log('menu toggle');
+    //console.log('menu toggle');
 };
 
 
@@ -121,7 +122,7 @@ function newPackageMenu() {
 /********************* ADDING RESPONSE INFORMATION TO THE LIST *****************************/
 
 function addNumToStore(responseJson, packageNickName) {     //adds information from responseJson to the STORE
-    console.log(`function addNumToStore() for "${packageNickName}"`);
+    //console.log(`function addNumToStore() for "${packageNickName}"`);
     STORE.unshift({
         nickName: packageNickName,
         trackingNum: responseJson.data.items[0].tracking_number,
@@ -134,8 +135,8 @@ function addNumToStore(responseJson, packageNickName) {     //adds information f
 };
 
 function displayResults(responseJson, packageNickName) {   //stores response data and refreshes the displayed list
-    console.log(`function displayResults() for "${packageNickName}`);
-    console.log(responseJson)
+    //console.log(`function displayResults() for "${packageNickName}`);
+    //console.log(responseJson)
     addNumToStore(responseJson, packageNickName);
     renderPackageList();
     $('#js-number-input').val('');
@@ -148,7 +149,7 @@ function displayResults(responseJson, packageNickName) {   //stores response dat
 /************************ REQUEST FUNCTIONS *********************************************/
 
 function getPackageInfo(newTrackingNum, carrier, packageNickName) { //gets the information then runs JSON through displayReults
-    console.log(`function getPackageInfo() for ${packageNickName}`);
+    //console.log(`function getPackageInfo() for ${packageNickName}`);
     var myHeaders = new Headers();
     myHeaders.append("x-rapidapi-host", " order-tracking.p.rapidapi.com");
     myHeaders.append("x-rapidapi-key", ` ${apiKeyTracking}`);
@@ -168,15 +169,15 @@ function getPackageInfo(newTrackingNum, carrier, packageNickName) { //gets the i
         .then(response => response.json())
         .then(responseJson => displayResults(responseJson, packageNickName))
         .catch(error => alert('Please check that your tracking number and carrier match and try again.'));
-    console.log('FETCH request sent');
+    //console.log('FETCH request sent');
 };
 
 function getMap(location) {
-    console.log('function getMap()');
+    //console.log('function getMap()');
     let locationEncoded = encodeURI(location)
-    console.log(locationEncoded);
+    //console.log(locationEncoded);
     let mapsURL = `https://www.google.com/maps/embed/v1/search?key=${apiKeyMaps}&q=${locationEncoded}`
-    console.log('retrieving Map from ' + mapsURL);
+    //console.log('retrieving Map from ' + mapsURL);
     return mapsURL;
 };
 
@@ -185,7 +186,7 @@ function getMap(location) {
 /************************* EVENT LISTENERS **********************************************/
 
 function handlePackageList() {
-    console.log('SCRIPT INITIATING')
+    //console.log('SCRIPT INITIATING')
     loadLocalStorage();
     refreshList();
     renderPackageList();
@@ -198,7 +199,7 @@ function handlePackageList() {
 function handleDeleteItem() {
     $('.js-package-list').on('click', '.js-item-delete', event => {
         const itemId = getItemIdFromElement(event.currentTarget);
-        console.log(itemId);
+        //console.log(itemId);
         deleteListItem(itemId);
     });
 };
@@ -211,7 +212,7 @@ function handleRefreshButton() {
 
 function handleNewPackageMenu() {
     $('#header').on('click', '.js-new-package-menu', event => {
-        console.log('handleNewPackageMenu()')
+        //console.log('handleNewPackageMenu()')
         newPackageMenu();
     })
 };
@@ -222,7 +223,7 @@ function watchForm() {
         const newTrackingNum = $('#js-number-input').val();
         const carrier = $('#js-carrier-input').val();
         const packageNickName = $('#js-nickname-input').val();
-        console.log('**NEW SUBMISSION**')
+        //console.log('**NEW SUBMISSION**')
         getPackageInfo(newTrackingNum, carrier, packageNickName);
         newPackageMenu();
     })

@@ -37,6 +37,10 @@ h3, p {
     background: white;
 }
 
+img {
+    width: 100%;
+}
+
 footer {
     bottom: 0;
     font-size:8px;
