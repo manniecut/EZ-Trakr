@@ -136,15 +136,18 @@ button:hover {
 }
 
 .dropdown-content {
-    transition: all 300ms ease-out;
+    opacity: 0;
     visibility: hidden;
     position: absolute;
     width: 100%;
     z-index: 1;
+    transition: all 300ms ease-out;
 }
 
 .show {
     visibility: visible;
+    opacity: 1;
+    transition: all 300ms ease-out;
 }
 
 /***************************** LIST ITEMS *********************************/
