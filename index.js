@@ -176,7 +176,7 @@ function getMap(location) {
     //console.log('function getMap()');
     let locationEncoded = encodeURI(location)
     //console.log(locationEncoded);
-    let mapsURL = `https://www.google.com/maps/embed/v1/search?key=${apiKeyMaps}&q=${locationEncoded}`
+    let mapsURL = `https://www.google.com/maps/embed/v1/place?key=${apiKeyMaps}&q=${locationEncoded}`
     //console.log('retrieving Map from ' + mapsURL);
     return mapsURL;
 };
